@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         for(int i = 0; i < MathF.Abs(rotationAmount); i++)
         {
             transform.Rotate(0, MathF.Sign(rotationAmount), 0);
-            yield return new WaitForSeconds(.005f);
+            yield return new WaitForSeconds(.0025f);
         }
         FindObjectOfType<Minimap>().UpdatePlayerIconDirection(transform.eulerAngles);
         moving = false;

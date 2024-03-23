@@ -10,10 +10,11 @@ public class Minimap : MonoBehaviour
     [SerializeField] float maxZoom = 1, minZoom = 0.1f;
     float currentZoom = 1f;
     [SerializeField] Vector2 mapImageSize;
+    [SerializeField] Vector3 lastDiscoveredTile;
     void Awake()
     {
         // Create a new texture with the same dimensions as the original texture
-        Texture2D newTexture = new Texture2D(200, 200, TextureFormat.RGBA32, false);
+        Texture2D newTexture = new Texture2D(201, 201, TextureFormat.RGBA32, false);
         newTexture.filterMode = FilterMode.Point;
 
         for(int i = 0; i < newTexture.width; i++)
@@ -45,9 +46,10 @@ public class Minimap : MonoBehaviour
             UpdateMapZoom(currentZoom);
         }
     }
+
     public void UpdateMinimap(Vector3 discoveredTile)
     {
-
+        lastDiscoveredTile = discoveredTile;
         int x = (int)discoveredTile.x + 100;
         int y = (int)discoveredTile.z + 100;
 
@@ -65,6 +67,6 @@ public class Minimap : MonoBehaviour
     public void UpdateMapZoom(float zoomValue)
     {
         minimapImage.rectTransform.sizeDelta = mapImageSize * zoomValue;
-        minimapImage.rectTransform.anchoredPosition = minimapImage.rectTransform.anchoredPosition*zoomValue;
+        UpdateMinimap(lastDiscoveredTile);
     }
 }
