@@ -1415,6 +1415,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimapImage: {fileID: 1253213971}
   playerIconImage: {fileID: 1992309796}
+  maxZoom: 1
+  minZoom: 0.1
+  mapImageSize: {x: 1500, y: 1500}
 --- !u!1 &1787391940
 GameObject:
   m_ObjectHideFlags: 0
