@@ -20,21 +20,24 @@ public class MazeGenerator : MonoBehaviour
         GenerateMaze(iterations, exploreDistance);
         turnChance = turnChanceStart;
     }
-    private void Update()
-    {
-        
-    }
+
 
     private bool isDiagonal(Vector3Int val)
     {
         return (val.x!= 0 && val.z != 0);
     }
 
+    public List<Vector3Int> GetMazeTiles()
+    {
+        return discoveredTiles;
+    }
 
     public void GenerateMaze(int iterations, int exploreDistance)
     {
         discoveredTiles.Add(new Vector3Int(0, 0, 0));
-        Instantiate(floorTilePrefab, new Vector3Int(0, 0, 0), Quaternion.identity);
+
+        var newTile =Instantiate(floorTilePrefab, new Vector3Int(0, 0, 0), Quaternion.identity);
+        newTile.transform.parent = this.transform;
         for(int i = 0; i < iterations; i++)
         {
             Vector3Int randomOrigin = discoveredTiles[Random.Range(0, discoveredTiles.Count)];
@@ -88,11 +91,13 @@ public class MazeGenerator : MonoBehaviour
                         if (validTileFound)
                         {
                             discoveredTiles.Add(currentOrigin);
-                            Instantiate(floorTilePrefab, currentOrigin, Quaternion.identity);
+                            newTile = Instantiate(floorTilePrefab, currentOrigin, Quaternion.identity);
+                            newTile.transform.parent = this.transform;
                         }
                     }
                 }    
             }
+            FindObjectOfType<EnemySpawner>().SpawnEnemies();
         }
         for(int i = 0; i < discoveredTiles.Count; i++)
         {
@@ -102,7 +107,8 @@ public class MazeGenerator : MonoBehaviour
                 Vector3Int neighbor = currentTile + cardinalDirections[j];
                 if (!discoveredTiles.Contains(neighbor))
                 {
-                    Instantiate(wallTilePrefab, neighbor + Vector3.up, Quaternion.identity);
+                    var newWall = Instantiate(wallTilePrefab, neighbor + Vector3.up, Quaternion.identity);
+                    newWall.transform.parent = this.transform;
                 }
             }
         }

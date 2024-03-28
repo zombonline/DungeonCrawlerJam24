@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23835d01d84b85c4ca7c9dc25b2e1aef, type: 3}
+  m_Name: armor_bra
+  m_EditorClassIdentifier: 
+  name: Chestplate of Power
+  desc: Very strong armor, but it might get a little nippy, bring a coat.
+  sprite: {fileID: 21300000, guid: 6f7b34ad21a129441ab0b81a40e09578, type: 3}
+  effectRange: 0f00000014000000
+  resistances: 00000000
+  weaknesses: 02000000

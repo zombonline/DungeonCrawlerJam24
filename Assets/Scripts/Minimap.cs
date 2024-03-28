@@ -11,6 +11,7 @@ public class Minimap : MonoBehaviour
     float currentZoom = 1f;
     [SerializeField] Vector2 mapImageSize;
     [SerializeField] Vector3 lastDiscoveredTile;
+    [SerializeField] Color mapColor1, mapColor2, trailColor;
     void Awake()
     {
         // Create a new texture with the same dimensions as the original texture
@@ -22,9 +23,9 @@ public class Minimap : MonoBehaviour
             for(int j = 0; j < newTexture.height; j++)
             {
                 if(i%2 == j%2)
-                    newTexture.SetPixel(i, j, Color.white);
+                    newTexture.SetPixel(i, j, mapColor1);
                 else
-                    newTexture.SetPixel(i, j, Color.grey);
+                    newTexture.SetPixel(i, j, mapColor2);
             }
         }
         newTexture.Apply();
@@ -53,7 +54,7 @@ public class Minimap : MonoBehaviour
         int x = (int)discoveredTile.x + 100;
         int y = (int)discoveredTile.z + 100;
 
-        minimapImage.sprite.texture.SetPixel(x, y, Color.blue);
+        minimapImage.sprite.texture.SetPixel(x, y, trailColor);
         minimapImage.sprite.texture.Apply();
 
         minimapImage.rectTransform.anchoredPosition = 
